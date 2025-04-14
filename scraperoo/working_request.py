@@ -55,13 +55,13 @@ def get_search_results_with_token(term):
     search_url = "https://banweb.canton.edu/StudentRegistrationSsb/ssb/searchResults/searchResults"
     search_headers = {
         "Host": "banweb.canton.edu",
-        "Cookie": "JSESSIONID=CE6B2DF79B8CDD5C6B27A9D3838A56E8; BIGipServer~CAN~itx2-banweb.canton.edu-http-29091=rd109o00000000000000000000ffff88df829do29091",  # You might need to handle cookies more dynamically
+        "Cookie": "JSESSIONID=CE6B2DF79B8CDD5C6B27A9D3838A56E8",  # You might need to handle cookies more dynamically
         "Sec-Ch-Ua": '"Not/A)Brand";v="8", "Chromium";v="126"',
         "Accept-Language": "en-US",
         "Sec-Ch-Ua-Mobile": "?0",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.57 Safari/537.36",
         "Accept": "application/json, text/javascript, */*; q=0.01",
-        "X-Synchronizer-Token": token,  # Use the extracted token
+        # "X-Synchronizer-Token": token,  # Use the extracted token
         "X-Requested-With": "XMLHttpRequest",
         "Sec-Ch-Ua-Platform": '"Linux"',
         "Sec-Fetch-Site": "same-origin",
@@ -92,6 +92,10 @@ def get_search_results_with_token(term):
         return None
 
 # Example usage
-results = get_search_results_with_token("202509")
+while True:
+    results = get_search_results_with_token("202509")
+    if results['totalCount'] != 0:
+        break
+
 if results:
-    pp(results)
+    pp(results['totalCount'])
