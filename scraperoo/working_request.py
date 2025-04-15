@@ -1,19 +1,18 @@
 import requests
-from bs4 import BeautifulSoup
-import random
-import string
-import time
 from pprint import pp as pp
-from cookie_test import get_session_cookies
-def get_search_results(term):
+from get_cookie_complex import get_cookies_complex
+
+
+def get_search_results(term, jession_id):
     session = requests.Session()  # Use a session to persist cookies
-    r = session.post("https://banweb.canton.edu/StudentRegistrationSsb/ssb/term/search?mode=search", data='term=202509&studyPath=&studyPathText=&startDatepicker=&endDatepicker=')
-    jessionid= r.cookies['JSESSIONID']
+
     
     search_url = "https://banweb.canton.edu/StudentRegistrationSsb/ssb/searchResults/searchResults"
-    # jessionid = 'A15272E27F9B4F85354C2CF2D3E644A1'
+
+    # if request is failing you may try hardcoding a recent jesssion id token
+    # jessionid = '3B1474723A22C62AFBC3946CD1DFA05B'
     search_headers = {
-        "Cookie": f"JSESSIONID={jessionid}",
+        "Cookie": f"JSESSIONID={jession_id}",
     }
     search_params = {
         "txt_term": term,
@@ -36,12 +35,15 @@ def get_search_results(term):
 
 
 i = 1
+
+term = '202502'
+jession_id = get_cookies_complex(term)
 while True:
-    results = get_search_results("202509")
+    results = get_search_results(term, jession_id)
     print(f'Trying new request...#{i}')
     i+=1
     if results['totalCount'] != 0:
         break
 
 if results:
-    pp(results['totalCount'])
+    pp(results)
