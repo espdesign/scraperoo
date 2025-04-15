@@ -42,15 +42,7 @@ def get_cookies_complex(term_search):
 
     search_button = wait.until(EC.element_to_be_clickable((By.ID, "search-go")))
     search_button.click()
-    # #IMPORTANT THIS TIME.SLEEP(3) GIVES THE SERVER TIME TO SET THE COOKIE AS A VALID COOKIE
-    # time.sleep(1)
-    # print('Waiting for cookie to register 4...')
-    # time.sleep(1)
-    # print('Waiting for cookie to register 3...')
-    # time.sleep(1)
-    # print('Waiting for cookie to register 2...')
-    # time.sleep(1)
-    # print('Waiting for cookie to register 1...')
+
     cookies = driver.get_cookies()
     for cookie in cookies:
         if len(cookie["value"]) == len("1F3635F8B5300845AD6ACF4448A84F73"):
