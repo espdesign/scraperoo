@@ -27,6 +27,7 @@ def create_unique_id():
 
 
 steps = [
+    "https://banweb.canton.edu/StudentRegistrationSsb/ssb/registration"
     "https://banweb.canton.edu/StudentRegistrationSsb/ssb/selfServiceMenu/data",
     "https://banweb.canton.edu/StudentRegistrationSsb/ssb/menu?type=Personal",
     "https://banweb.canton.edu/StudentRegistrationSsb/ssb/classSearch/getTerms?searchTerm=&offset=1&max=10&_=1744659190021",
@@ -57,4 +58,5 @@ with requests.Session() as s:
     for i in steps2:
         r = s.get(i)
         print(s.cookies)
+    print(r.content)
 
